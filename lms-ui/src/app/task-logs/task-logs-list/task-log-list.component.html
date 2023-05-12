@@ -1,0 +1,28 @@
+<div>
+  <div class="row mb-3">
+    <div class="col">
+      <h2 class="text-center">TaskLogs</h2>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary mb-3" (click)="create()">Add task log</button>
+  <table>
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Task Category</th>
+      <th>Task Description</th>
+      <th>Time Spent</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let taskLog of taskLogs">
+      <td>{{ taskLog.date }}</td>
+      <td>{{ taskLog.category }}</td>
+      <td>{{ taskLog.description }}</td>
+      <td>{{ taskLog.timeSpent }}</td>
+      <td><button (click)="editTaskLog(taskLog.id)">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

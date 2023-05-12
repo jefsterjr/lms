@@ -1,0 +1,30 @@
+<div class="row mb-3">
+  <div class="col">
+    <h2 class="text-center">Courses</h2>
+  </div>
+</div>
+
+<button type="button" class="btn btn-primary mb-3" (click)="create()">Create Course</button>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Start Date</th>
+    <th scope="col">End Date</th>
+    <th scope="col">Options</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let course of courses">
+    <td>{{course.name}}</td>
+    <td>{{course.startDate | date:'shortDate'}}</td>
+    <td>{{course.endDate | date:'shortDate'}}</td>
+    <td>
+      <button type="button" class="btn btn-sm btn-secondary me-1" (click)="edit(course)">Edit</button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="delete(course)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

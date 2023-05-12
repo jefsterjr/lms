@@ -1,0 +1,23 @@
+<div class="row mb-3">
+  <div class="col">
+    <h2 class="text-center">Create Course</h2>
+  </div>
+</div>
+
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
+    <div class="col-md-6 form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+    <span class="text-danger"
+          *ngIf="isFieldInvalid('password', courseForm)">
+                                 Course name is required
+                            </span>
+  </div>
+
+  <div class="text-end">
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+    <button type="submit" class="btn btn-primary ms-3">Register</button>
+  </div>
+</form>

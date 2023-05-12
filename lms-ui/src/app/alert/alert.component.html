@@ -1,0 +1,6 @@
+<div class="row mt-3">
+  <div [ngClass]="['alert',  'alert-dismissible', 'alert-' + alert.type ]" *ngFor="let alert of alerts">
+    {{alert.message}}
+    <button type="button" class="btn-close" (click)="close(alert)"></button>
+  </div>
+</div>

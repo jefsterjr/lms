@@ -1,0 +1,160 @@
+<div class="row mb-3">
+  <div class="col">
+    <h2 class="text-center">Learning Management System</h2>
+  </div>
+</div>
+<div>
+  <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="tab-login" [class.active]="viewMode=='login'" (click)="viewMode='login'"
+              aria-selected="true">Login
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tab-register" [class.active]="viewMode=='register'" (click)="viewMode='register'"
+              aria-selected="false">Sign Up
+      </button>
+    </li>
+  </ul>
+</div>
+
+<div class="tab-content" [ngSwitch]="viewMode">
+  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login"
+       *ngSwitchCase="'login'">
+    <form [formGroup]="signInformGroup" (ngSubmit)="onSubmit()">
+      <br>
+      <div class="row">
+        <div class="form-outline mb-4">
+          <label class="form-label" for="username">Email</label>
+          <input type="email" id="username" class="form-control" formControlName="username"/>
+          <span class="text-danger" *ngIf="isFieldInvalid('username', signInformGroup)">
+                                 Email is is required
+                            </span>
+
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-control" formControlName="password"/>
+          <span class="text-danger"
+                *ngIf="isFieldInvalid('password', signInformGroup)">
+                                 Password is required
+                            </span>
+
+        </div>
+      </div>
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary form-control">Sign in</button>
+    </form>
+
+  </div>
+  <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register"
+       *ngSwitchCase="'register'">
+    <form class="form" [formGroup]="signUpFormGroup" (ngSubmit)="onSignUp()">
+      <br>
+      <div class="row mb-3">
+        <div class="col-md-6 form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('firstName')?.touched || submitted) && signUpFormGroup.get('firstName')?.errors?.required">
+                                 First Name is required
+                            </span>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('lastName')?.touched || submitted) && signUpFormGroup.get('lastName')?.errors?.required">
+                                 Last Name is required
+                            </span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6 form-group">
+          <label for="dateOfBirth" class="form-label">Date of Birth</label>
+          <input type="date" id="dateOfBirth" class="form-control" formControlName="dateOfBirth">
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('dateOfBirth')?.touched || submitted) && signUpFormGroup.get('lastName')?.errors?.required">
+                                 Date of Birth is required
+                            </span>
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email">
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('email')?.touched || submitted) && signUpFormGroup.get('email')?.errors?.required">
+                                 Email is required
+                            </span>
+          <span class="text-danger"
+                *ngIf="signUpFormGroup.get('email')?.touched && signUpFormGroup.get('email')?.errors?.email">
+                                Enter a valid email address
+                            </span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6 form-group">
+          <label for="phoneNumber" class="form-label">Phone Number</label>
+          <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber">
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('phoneNumber')?.touched || submitted) && signUpFormGroup.get('phoneNumber')?.errors?.required">
+                                 Phone Number is required
+                            </span>
+
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" id="address" class="form-control" formControlName="address">
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('address')?.touched || submitted) && signUpFormGroup.get('address')?.errors?.required">
+                                 Address is required
+                            </span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <!-- Password input -->
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password"/>
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('password')?.touched || submitted) && signUpFormGroup.get('password')?.errors?.required">
+                                 Password is required
+                            </span>
+          <span class="text-danger"
+                *ngIf="signUpFormGroup.get('password')?.touched && signUpFormGroup.get('password')?.errors?.invalidPassword">
+                                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                                letter and 1 number
+                            </span>
+        </div>
+
+        <div class="col-md-6 form-group">
+          <label class="form-label" for="confirmPassword">Confirm password</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"/>
+          <span class="text-danger"
+                *ngIf="(signUpFormGroup.get('confirmPassword')?.touched || submitted) && signUpFormGroup.get('confirmPassword')?.errors?.required">
+                                 Confirm password is required
+                            </span>
+          <span class="text-danger"
+                *ngIf="signUpFormGroup.get('confirmPassword')?.touched &&signUpFormGroup.get('confirmPassword')?.errors?.passwordMismatch">
+                                Passwords does not match
+                            </span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        </div>
+        <div class="col-md-6 ">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
